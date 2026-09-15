@@ -1,0 +1,21 @@
+name = "posts"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "POSTS"
+id = "52ec3fd731c74389a98466b851504434"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "posts"
+database_id = "98f3a2fd-fed4-477f-beec-dd88a535282f"
+
+[triggers]
+crons = ["0 * * * *"]
+
+# Optional: bind an R2 bucket for attachments. Without it, encrypted
+# attachments fall back to D1 and are capped at 256 KB of ciphertext.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "posts-media"

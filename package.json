@@ -1,0 +1,11 @@
+{
+  "name": "posts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/bundle.mjs",
+    "deploy": "node tools/bundle.mjs && wrangler d1 execute DB --remote --file=schema.sql --yes && wrangler deploy",
+    "test": "node test.mjs && node test-crypto.mjs && node test-e2e.mjs && node test-browser.mjs",
+    "test:browser": "node test-browser.mjs"
+  }
+}
