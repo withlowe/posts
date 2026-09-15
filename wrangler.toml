@@ -4,12 +4,12 @@ compatibility_date = "2026-01-01"
 
 [[kv_namespaces]]
 binding = "POSTS"
-id = "52ec3fd731c74389a98466b851504434"
+id = "REPLACE_WITH_YOUR_KV_ID"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "posts"
-database_id = "98f3a2fd-fed4-477f-beec-dd88a535282f"
+database_id = "REPLACE_WITH_YOUR_D1_ID"
 
 [triggers]
 crons = ["0 * * * *"]

@@ -4,7 +4,7 @@ A reader where everything is a feed, and some feeds are private.
 
 Subscribe to public feeds and read them. Give every sender its own **hook** — three random words — and delete it when you're done. One Worker on your own Cloudflare account.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Posts-fyi/posts)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR-USERNAME/posts)
 
 ```text
 posts.example/                         nothing. accepts nothing, reveals nothing.
@@ -46,10 +46,12 @@ posts/
 └── test-stub.mjs    in-memory KV and D1
 ```
 
-`npm test` runs all four — 241 checks, none of which need a Cloudflare account. The browser suite needs Playwright, which is deliberately **not** a dependency, so a deploy never has to install a browser:
+`npm test` runs all four — 241 checks, none of which need a Cloudflare account.
+
+`wrangler` is the only dependency, because Cloudflare's builder installs from `package.json` and then runs the deploy script. Playwright is deliberately **not** one — a deploy would download a browser every time. Add it when you want the browser suite:
 
 ```
-npm i -D playwright && npx playwright install chromium
+npm i playwright --no-save && npx playwright install chromium
 ```
 
 Without it that suite skips itself and the other three still run. The browser suite skips itself where Playwright or Chromium is missing.
@@ -73,7 +75,7 @@ Two routes to the same result. The button is quicker and needs nothing installed
 **A2. Point the button at your copy.** In this README, change `YOUR-USERNAME` in the button link to your account:
 
 ```
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Posts-fyi/posts)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR-USERNAME/posts)
 ```
 
 The link is just `https://deploy.workers.cloudflare.com/?url=` followed by your repository URL, so it works pasted into a browser too.
@@ -211,6 +213,8 @@ Everything under `/api` needs `Authorization: Bearer <owner secret>`.
 **No sign-up on a fresh deployment, or "Already claimed"** — a configuration record is already in KV, so an account was made at some point. If you reused a namespace from an earlier instance, that is where it came from: create a new namespace, or paste the original owner secret.
 
 **The page loads but nothing appears in the sidebar** — the browser script threw. Open the console. `npm test` runs that script in real Chromium and would normally catch it before a deploy.
+
+**`sh: 1: wrangler: not found`** in the build log — `wrangler` is missing from `devDependencies`. The builder installs only what `package.json` asks for, and a globally installed wrangler on your own machine is not there. Check the `devDependencies` block is intact and push again.
 
 **`reached the Workers Free limit of 5 cron triggers`** — the worker itself deployed; only the schedule didn't register. The limit is per account, so old workers you have stopped using are still holding theirs. Delete them under Workers & Pages, then retry.
 
