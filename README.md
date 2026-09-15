@@ -4,7 +4,7 @@ A reader where everything is a feed, and some feeds are private.
 
 Subscribe to public feeds and read them. Give every sender its own **hook** — three random words — and delete it when you're done. One Worker on your own Cloudflare account.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR-USERNAME/posts)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/withlowe/posts)
 
 ```text
 posts.example/                         nothing. accepts nothing, reveals nothing.
